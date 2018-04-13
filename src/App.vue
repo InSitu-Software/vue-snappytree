@@ -4,6 +4,7 @@
     <div class="filterRow">
       <snappy-tree
               :items="items"
+              @activeChild="setActiveChild"
       />
       <p>Und der Text soll sich nicht bewegen wenn das Menu aufgeht</p>
     </div>
@@ -24,6 +25,29 @@ export default {
     return {
       items
     }
+  },
+  methods: {
+      setActiveChild (child) {
+          console.log(child)
+          this.activeChild = child
+          const setExpanded = item => {
+              let expanded = false
+              if (item.children) {
+                  for (let i=0; i< item.children.length; i++) {
+                      expanded = expanded || setExpanded(item.children[i])
+                  }
+              }
+              if (item.id === child.id) {
+                  expanded = true
+              }
+              item.isExpanded = expanded
+              return expanded
+          }
+
+          this.items.forEach(function(item) {
+              item.isExpanded = setExpanded(item)
+          })
+      }
   }
 }
 </script>

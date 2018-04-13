@@ -8,6 +8,7 @@ const createTree = function(itemCount, nestedCount) {
       nodes.push({
         id,
         label,
+        isExpanded: false,
         children: nestedCount > 0
           ? createNodes(id, nestedCount -1 )
           : undefined
