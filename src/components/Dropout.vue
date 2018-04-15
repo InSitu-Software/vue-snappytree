@@ -1,8 +1,6 @@
 <template>
-    <div class="vst-dropout">
-        <div class="vst-wrapper" :style="{ left: left + 'px', top: top + 'px' }">
-            <slot></slot>
-        </div>
+    <div class="vst-wrapper" :style="{ left: left + 'px', top: top + 'px' }">
+        <slot></slot>
     </div>
 </template>
 
@@ -22,7 +20,7 @@
 </script>
 
 <style lang="scss">
-    .vst-dropout {
+    .vst-dropout2 {
         position: fixed;
         left: 0;
         top: 0;
