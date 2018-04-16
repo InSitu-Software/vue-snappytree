@@ -35,7 +35,7 @@
             toggleChildren() {
                 this.item.children
                     ? this.instance.setActiveChild(this.item)
-                    : this.isOpen = false
+                    : this.isExpanded = false
 
             },
             getLeft() {

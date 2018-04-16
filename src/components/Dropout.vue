@@ -20,12 +20,6 @@
 </script>
 
 <style lang="scss">
-    .vst-dropout2 {
-        position: fixed;
-        left: 0;
-        top: 0;
-    }
-
     .vst-wrapper {
         position: absolute;
         background-color: lightgray;
