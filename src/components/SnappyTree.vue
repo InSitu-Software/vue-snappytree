@@ -70,7 +70,7 @@
             },
             getTop(menu) {
               const level = menu.id.split('_').pop()
-              return level * 30
+              return level * 30 + 30
             }
         },
 
