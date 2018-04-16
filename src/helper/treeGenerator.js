@@ -2,7 +2,7 @@ const createTree = function(itemCount, nestedCount) {
 
   const createNodes = function (parent_id, nestedCount) {
     const nodes = []
-    for (let i=0; i<itemCount; i++) {
+    for (let i = 1; i <= itemCount; i++) {
       const id= parent_id + '_' + i
       const label = 'Item ' + id
       nodes.push({
@@ -16,7 +16,12 @@ const createTree = function(itemCount, nestedCount) {
     }
     return nodes
   }
-  return createNodes('ID', nestedCount -1)
+  return {
+    id: 'ID_0',
+    label: 'Root',
+    isExpanded: true,
+    children: createNodes('ID', nestedCount -1)
+  }
 }
 
 export default createTree

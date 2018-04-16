@@ -5,12 +5,6 @@
                 v-if="item.children"
                 @click="toggleChildren"
         > -> </span>
-        <dropout v-if="item.isExpanded" :left="getLeft()" :top="getTop()">
-            <item
-                    v-for="child in item.children"
-                    :key="child.id"
-                    :item="child"/>
-        </dropout>
     </div>
 </template>
 

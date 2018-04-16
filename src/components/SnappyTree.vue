@@ -3,10 +3,14 @@
         <search-input
                 @toggle="toggleOpen"
         />
-        <dropout v-if="showDropout">
-            <template>
-                <item v-for="item in items" :key="item.id" :item="item"/>
-            </template>
+        <dropout
+                v-if="showDropout"
+                v-for="menu, index in expandedItems"
+                :key="menu.id"
+                :left="index * 300"
+                :top="getTop(menu)"
+        >
+            <item v-for="item in menu.children" :key="item.id" :item="item"/>
         </dropout>
     </div>
 </template>
@@ -24,8 +28,8 @@
             Item
         },
         props: {
-            items: {
-                type: Array,
+            tree: {
+                type: Object,
                 required: true
             }
         },
@@ -40,12 +44,33 @@
                 instance: this
             }
         },
+        computed: {
+            expandedItems () {
+                const expanded = []
+                const searchExpanded = item => {
+                  if (item.isExpanded) {
+                    expanded.push(item)
+                  }
+                  if (item.children) {
+                    item.children.forEach(searchExpanded)
+                  }
+                }
+
+                searchExpanded(this.tree)
+
+                return expanded
+            }
+        },
         methods: {
             toggleOpen() {
                 this.showDropout = !this.showDropout
             },
             setActiveChild(child) {
                 this.$emit('activeChild', child)
+            },
+            getTop(menu) {
+              const level = menu.id.split('_').pop()
+              return level * 30
             }
         },
 

@@ -3,7 +3,7 @@
     <h1>SnappyTree Playground</h1>
     <div class="filterRow">
       <snappy-tree
-              :items="items"
+              :tree="tree"
               @activeChild="setActiveChild"
       />
       <p>Und der Text soll sich nicht bewegen wenn das Menu aufgeht</p>
@@ -21,14 +21,13 @@ export default {
     SnappyTree
   },
   data () {
-    const items = TreeGenerator(10,3)
+    const tree = TreeGenerator(10,3)
     return {
-      items
+      tree
     }
   },
   methods: {
       setActiveChild (child) {
-          console.log(child)
           this.activeChild = child
           const setExpanded = item => {
               let expanded = false
@@ -44,7 +43,7 @@ export default {
               return expanded
           }
 
-          this.items.forEach(function(item) {
+          this.tree.children.forEach(function(item) {
               item.isExpanded = setExpanded(item)
           })
       }
