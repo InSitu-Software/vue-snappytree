@@ -27,6 +27,7 @@
         this.item.children
           ? this.instance.setActiveChild(this.item)
           : this.item.isExpanded = false
+        this.$emit('size', 'TestMe Item')
       },
       getLeft () {
         const rect = this.$el.getBoundingClientRect()
@@ -37,7 +38,6 @@
         return rect.y
       },
       hoverItem () {
-        console.log('Hovering')
         if (this.instance.enableHover) {
           this.toggleChildren()
         }

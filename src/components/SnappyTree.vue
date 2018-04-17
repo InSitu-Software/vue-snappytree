@@ -5,12 +5,13 @@
         />
         <dropout
                 v-if="showDropout"
-                v-for="menu, index in expandedItems"
+                v-for="menu, index in renderDropouts"
                 :key="menu.id"
                 :left="index * 200"
                 :top="getTop(menu)"
+                @size="onSize"
         >
-            <item v-for="item in menu.children" :key="item.id" :item="item"/>
+            <item v-for="item in menu.children" :key="item.id" :item="item" @size="onSize"/>
         </dropout>
     </div>
 </template>
@@ -42,7 +43,8 @@
       return {
         showDropout: false,
         activeChild: undefined,
-        itemHash: {}
+        itemHash: {},
+        renderDropouts: []
       }
     },
     provide () {
@@ -62,6 +64,19 @@
             }
           }
           createHashMap(this.tree)
+        }
+      },
+      expandedItems: {
+        handler (after, before) {
+          const renderLength = this.renderDropouts.length
+          this.renderDropouts = []
+          for (let i=0; i < renderLength; i++) {
+            const tempItem = this.expandedItems[i]
+            if (tempItem) {
+              this.renderDropouts.push(tempItem)
+            }
+
+          }
         }
       }
     },
@@ -85,6 +100,9 @@
     methods: {
       toggleOpen () {
         this.showDropout = !this.showDropout
+        this.showDropout
+          ? this.renderDropouts.push(this.expandedItems[0])
+          : this.renderDropouts = []
       },
       setActiveChild (child) {
         this.$emit('activeChild', child)
@@ -98,6 +116,14 @@
       },
       getItemById (id) {
         return this.itemHash[id]
+      },
+      onSize (parentRect) {
+        console.log('OnSize: ', parentRect)
+        const tempItem = this.expandedItems[this.renderDropouts.length]
+        console.log(tempItem)
+        if (tempItem) {
+          this.renderDropouts.push(tempItem)
+        }
       }
     },
 
