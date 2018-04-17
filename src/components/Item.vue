@@ -1,5 +1,5 @@
 <template>
-    <div :class="['vst-item', {'active': item.isExpanded}]" @click="toggleChildren" @mouseenter="hoverItem">
+    <div :class="['vst-item', {'isExpanded': item.isExpanded}]" @click="toggleChildren" @mouseenter="hoverItem">
         <label>{{item.label}}</label>
         <span v-if="item.children"> -> </span>
     </div>
@@ -26,7 +26,7 @@
       toggleChildren () {
         this.item.children
           ? this.instance.setActiveChild(this.item)
-          : this.isExpanded = false
+          : this.item.isExpanded = false
       },
       getLeft () {
         const rect = this.$el.getBoundingClientRect()
@@ -63,7 +63,7 @@
             cursor: pointer;
         }
 
-        &.active {
+        &.isExpanded {
             background-color: azure;
         }
     }
