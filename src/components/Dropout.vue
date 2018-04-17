@@ -1,5 +1,5 @@
 <template>
-    <div class="vst-wrapper" :style="{ left: left + 'px', top: top + 'px' }">
+    <div class="vst-dropout" :style="{ left: left + 'px', top: top + 'px' }">
         <slot></slot>
     </div>
 </template>
@@ -20,11 +20,11 @@
 </script>
 
 <style lang="scss">
-    .vst-wrapper {
+    .vst-dropout {
         position: absolute;
         background-color: lightgray;
         border: 1px solid rgba(0,0,0,0.5);
-        width: 300px;
+        width: 200px;
         max-height: 400px;
         overflow: auto;
     }
