@@ -36,6 +36,10 @@
       enableHover: {
         type: Boolean,
         default: false
+      },
+      oneRow: {
+        type: Boolean,
+        default: false
       }
     },
     data () {
@@ -63,26 +67,6 @@
             }
           }
           createHashMap(this.tree)
-        }
-      },
-      expandedItems1: {
-        handler (after, before) {
-          const renderLength = this.after.length
-          console.log('Triggered watcher...', after, before)
-
-          if (after.length > before.length) {
-            return
-          }
-
-          const newRenderDropouts = []
-
-          for (let i=0; i < renderLength; i++) {
-            const tempItem = this.expandedItems[i]
-            if (tempItem) {
-              this.renderDropouts.push(tempItem)
-            }
-
-          }
         }
       }
     },

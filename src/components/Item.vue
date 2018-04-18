@@ -40,8 +40,12 @@
         }
       },
       expandItem () {
+
         this.$emit('expandItem', {
-          top: this.$parent.$el.offsetTop - this.$parent.$el.scrollTop + this.$el.offsetTop,
+          top: this.instance.oneRow
+            ? this.$parent.$el.offsetTop
+            : this.$parent.$el.offsetTop - this.$parent.$el.scrollTop + this.$el.offsetTop
+          ,
           right: this.$parent.$el.offsetLeft + this.$parent.$el.offsetWidth
         })
       }
