@@ -5,6 +5,7 @@
             <snappy-tree
                     :tree="tree"
                     @activeChild="setActiveChild"
+                    enable-hover
             />
             <p>Und der Text soll sich nicht bewegen wenn das Menu aufgeht</p>
         </div>

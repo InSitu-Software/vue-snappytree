@@ -144,6 +144,7 @@
           newRenderDropouts.push(this.renderDropouts[i])
           i++
         }
+
         newRenderDropouts.push({
           item: tempItem,
           parentRect

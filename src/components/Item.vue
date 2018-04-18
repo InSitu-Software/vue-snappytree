@@ -33,25 +33,13 @@
     },
     methods: {
       toggleChildren () {
-        this.item.children
-          ? this.instance.setActiveChild(this.item)
-          : this.item.isExpanded = false
-        this.$emit('size', {
-          top: this.$parent.$el.offsetTop + this.$el.offsetTop,
-          right: this.$parent.$el.offsetLeft + this.$parent.$el.offsetWidth
-        })
-        /*this.instance.toggleOpen()
-        setTimeout(() => {
-          this.instance.toggleOpen()
-        }, 0)*/
-      },
-      getLeft () {
-        const rect = this.$el.getBoundingClientRect()
-        return rect.x + rect.width
-      },
-      getTop () {
-        const rect = this.$el.getBoundingClientRect()
-        return rect.y
+        if (this.item.children) {
+          this.instance.setActiveChild(this.item)
+          this.$emit('size', {
+            top: this.$parent.$el.offsetTop + this.$el.offsetTop,
+            right: this.$parent.$el.offsetLeft + this.$parent.$el.offsetWidth
+          })
+        }
       },
       hoverItem () {
         if (this.instance.enableHover) {
