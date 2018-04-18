@@ -7,6 +7,7 @@
                     @activeChild="setActiveChild"
                     oneRow
                     enableHover
+                    snappy
             />
             <p>Und der Text soll sich nicht bewegen wenn das Menu aufgeht</p>
         </div>

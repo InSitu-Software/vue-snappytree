@@ -40,6 +40,10 @@
       oneRow: {
         type: Boolean,
         default: false
+      },
+      snappy: {
+        type: Boolean,
+        default: false
       }
     },
     data () {

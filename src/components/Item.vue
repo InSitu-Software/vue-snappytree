@@ -35,18 +35,20 @@
         }
       },
       hoverItem () {
-        if (this.instance.enableHover) {
+        if (this.instance.enableHover && !this.instance.snappy) {
           this.toggleChildren()
         }
       },
       expandItem () {
 
         this.$emit('expandItem', {
-          top: this.instance.oneRow
+          top: this.instance.oneRow || this.instance.snappy
             ? this.$parent.$el.offsetTop
             : this.$parent.$el.offsetTop - this.$parent.$el.scrollTop + this.$el.offsetTop
           ,
-          right: this.$parent.$el.offsetLeft + this.$parent.$el.offsetWidth
+          right: this.instance.snappy
+            ? this.$parent.$el.offsetLeft
+            : this.$parent.$el.offsetLeft + this.$parent.$el.offsetWidth
         })
       }
     },
