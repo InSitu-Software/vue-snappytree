@@ -18,7 +18,7 @@
     },
     mounted () {
       console.log('Dropout mounted')
-      this.$emit('size', 'TestMe')
+      // this.$emit('size', 'TestMe')
     }
   }
 </script>
@@ -28,8 +28,9 @@
         position: absolute;
         background-color: lightgray;
         border: 1px solid rgba(0,0,0,0.5);
-        width: 200px;
+        width: 100%;
         max-height: 400px;
+        max-width: 250px;
         overflow: auto;
     }
 </style>

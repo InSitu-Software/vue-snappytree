@@ -5,7 +5,6 @@
             <snappy-tree
                     :tree="tree"
                     @activeChild="setActiveChild"
-                    enableHover
             />
             <p>Und der Text soll sich nicht bewegen wenn das Menu aufgeht</p>
         </div>
@@ -84,7 +83,7 @@
         }
 
         .filterRow {
-            padding: 0% 40%;
+            padding: 0 70% 0 10% ;
         }
     }
 </style>

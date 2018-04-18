@@ -6,12 +6,12 @@
         <dropout
                 v-if="showDropout"
                 v-for="menu, index in renderDropouts"
-                :key="menu.id"
-                :left="index * 200"
+                :key="menu.item.id"
+                :left="getLeft(menu)"
                 :top="getTop(menu)"
                 @size="onSize"
         >
-            <item v-for="item in menu.children" :key="item.id" :item="item" @size="onSize"/>
+            <item v-for="item in menu.item.children" :key="item.id" :item="item" @size="onSize"/>
         </dropout>
     </div>
 </template>
@@ -66,22 +66,30 @@
           createHashMap(this.tree)
         }
       },
-      expandedItems: {
+      expandedItems1: {
         handler (after, before) {
           const renderLength = this.renderDropouts.length
-          this.renderDropouts = []
-          for (let i=0; i < renderLength; i++) {
+          console.log('Triggered watcher...')
+          this.renderDropouts = [{
+            item: this.expandedItems[0],
+            parentRect: {
+              top: 30,
+              right: 0
+            }
+          }]
+          /*for (let i=0; i < renderLength; i++) {
             const tempItem = this.expandedItems[i]
             if (tempItem) {
               this.renderDropouts.push(tempItem)
             }
 
-          }
+          }*/
         }
       }
     },
     computed: {
       expandedItems () {
+        console.log('Recalculate expandedItems')
         const expanded = []
         const searchExpanded = item => {
           if (item.isExpanded) {
@@ -101,18 +109,28 @@
       toggleOpen () {
         this.showDropout = !this.showDropout
         this.showDropout
-          ? this.renderDropouts.push(this.expandedItems[0])
+          ? this.renderDropouts.push({
+            item: this.expandedItems[0],
+            parentRect: {
+              top: 30,
+              right: 0
+            }
+          })
           : this.renderDropouts = []
       },
       setActiveChild (child) {
         this.$emit('activeChild', child)
       },
       getTop (menu) {
-        const levels = menu.id.split('_')
+        /*const levels = menu.id.split('_')
         levels.shift()
         const sumLevels = levels.reduce((sum, level) => sum + parseInt(level) -1, 0)
 
-        return sumLevels * 30 + 30
+        return sumLevels * 30 + 30*/
+        return menu.parentRect.top
+      },
+      getLeft (menu) {
+        return menu.parentRect.right
       },
       getItemById (id) {
         return this.itemHash[id]
@@ -120,9 +138,12 @@
       onSize (parentRect) {
         console.log('OnSize: ', parentRect)
         const tempItem = this.expandedItems[this.renderDropouts.length]
-        console.log(tempItem)
         if (tempItem) {
-          this.renderDropouts.push(tempItem)
+          console.log('New Dropout')
+          this.renderDropouts.push({
+            item: tempItem,
+            parentRect
+          })
         }
       }
     },

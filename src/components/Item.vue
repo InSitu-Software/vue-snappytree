@@ -22,12 +22,24 @@
     inject: [
       'instance',
     ],
+    mounted () {
+      if (this.item.isExpanded) {
+        console.log('Trigger next box...')
+        this.$emit('size', {
+          top: this.$parent.$el.offsetTop + this.$el.offsetTop,
+          right: this.$parent.$el.offsetLeft + this.$parent.$el.offsetWidth
+        })
+      }
+    },
     methods: {
       toggleChildren () {
         this.item.children
           ? this.instance.setActiveChild(this.item)
           : this.item.isExpanded = false
-        this.$emit('size', 'TestMe Item')
+        this.$emit('size', {
+          top: this.$parent.$el.offsetTop + this.$el.offsetTop,
+          right: this.$parent.$el.offsetLeft + this.$parent.$el.offsetWidth
+        })
       },
       getLeft () {
         const rect = this.$el.getBoundingClientRect()
