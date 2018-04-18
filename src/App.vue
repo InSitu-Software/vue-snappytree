@@ -5,7 +5,6 @@
             <snappy-tree
                     :tree="tree"
                     @activeChild="setActiveChild"
-                    enable-hover
             />
             <p>Und der Text soll sich nicht bewegen wenn das Menu aufgeht</p>
         </div>
@@ -22,7 +21,7 @@
       SnappyTree,
     },
     data () {
-      const tree = TreeGenerator(3, 4)
+      const tree = TreeGenerator(10, 3)
       return {
         tree,
       }

@@ -29,7 +29,7 @@
         background-color: lightgray;
         border: 1px solid rgba(0,0,0,0.5);
         width: 100%;
-        max-height: 400px;
+        max-height: 250px;
         max-width: 250px;
         overflow: auto;
     }
