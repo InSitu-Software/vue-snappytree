@@ -5,7 +5,7 @@
         />
         <dropout
                 v-if="showDropout"
-                v-for="menu, index in renderDropouts"
+                v-for="menu in renderDropouts"
                 :key="menu.item.id"
                 :left="getLeft(menu)"
                 :top="getTop(menu)"

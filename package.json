@@ -5,7 +5,9 @@
   "scripts": {
     "serve": "vue-cli-service serve --open",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "styleguide": "vue-styleguidist server",
+    "styleguide:build": "vue-styleguidist build"
   },
   "dependencies": {
     "vue": "^2.5.13"
@@ -17,6 +19,7 @@
     "node-sass": "^4.8.3",
     "sass-loader": "^7.0.0",
     "style-loader": "^0.20.3",
+    "vue-styleguidist": "^1.7.3",
     "vue-template-compiler": "^2.5.13"
   },
   "babel": {
