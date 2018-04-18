@@ -24,21 +24,14 @@
     ],
     mounted () {
       if (this.item.isExpanded) {
-        console.log('Trigger next box...')
-        this.$emit('size', {
-          top: this.$parent.$el.offsetTop - this.$parent.$el.scrollTop + this.$el.offsetTop,
-          right: this.$parent.$el.offsetLeft + this.$parent.$el.offsetWidth
-        })
+        this.expandItem()
       }
     },
     methods: {
       toggleChildren () {
         if (this.item.children) {
           this.instance.setActiveChild(this.item)
-          this.$emit('size', {
-            top: this.$parent.$el.offsetTop - this.$parent.$el.scrollTop + this.$el.offsetTop,
-            right: this.$parent.$el.offsetLeft + this.$parent.$el.offsetWidth
-          })
+          this.expandItem()
         }
       },
       hoverItem () {
@@ -46,6 +39,12 @@
           this.toggleChildren()
         }
       },
+      expandItem () {
+        this.$emit('expandItem', {
+          top: this.$parent.$el.offsetTop - this.$parent.$el.scrollTop + this.$el.offsetTop,
+          right: this.$parent.$el.offsetLeft + this.$parent.$el.offsetWidth
+        })
+      }
     },
   }
 </script>

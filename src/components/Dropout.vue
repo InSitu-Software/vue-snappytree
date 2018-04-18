@@ -15,10 +15,6 @@
         type: Number,
         default: 0
       }
-    },
-    mounted () {
-      console.log('Dropout mounted')
-      // this.$emit('size', 'TestMe')
     }
   }
 </script>

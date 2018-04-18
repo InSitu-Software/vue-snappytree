@@ -10,7 +10,7 @@
                 :left="getLeft(menu)"
                 :top="getTop(menu)"
         >
-            <item v-for="item in menu.item.children" :key="item.id" :item="item" @size="onSize"/>
+            <item v-for="item in menu.item.children" :key="item.id" :item="item" @expandItem="expandItem"/>
         </dropout>
     </div>
 </template>
@@ -88,7 +88,6 @@
     },
     computed: {
       expandedItems () {
-        console.log('Recalculate expandedItems')
         const expanded = []
         const searchExpanded = item => {
           if (item.isExpanded) {
@@ -121,11 +120,6 @@
         this.$emit('activeChild', child)
       },
       getTop (menu) {
-        /*const levels = menu.id.split('_')
-        levels.shift()
-        const sumLevels = levels.reduce((sum, level) => sum + parseInt(level) -1, 0)
-
-        return sumLevels * 30 + 30*/
         return menu.parentRect.top
       },
       getLeft (menu) {
@@ -134,9 +128,7 @@
       getItemById (id) {
         return this.itemHash[id]
       },
-      onSize (parentRect) {
-        console.log('OnSize: ', parentRect)
-
+      expandItem (parentRect) {
         const tempItem = this.expandedItems[this.renderDropouts.length] || this.expandedItems[this.expandedItems.length -1 ]
         const newRenderDropouts = []
         let i=0
