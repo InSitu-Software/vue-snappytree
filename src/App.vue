@@ -28,6 +28,7 @@
     },
     methods: {
       setActiveChild (child) {
+        console.log('SetActiveChild')
         this.activeChild = child
         const forAll = item => {
           item.isExpanded = false;

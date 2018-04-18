@@ -40,6 +40,10 @@
           top: this.$parent.$el.offsetTop + this.$el.offsetTop,
           right: this.$parent.$el.offsetLeft + this.$parent.$el.offsetWidth
         })
+        /*this.instance.toggleOpen()
+        setTimeout(() => {
+          this.instance.toggleOpen()
+        }, 0)*/
       },
       getLeft () {
         const rect = this.$el.getBoundingClientRect()

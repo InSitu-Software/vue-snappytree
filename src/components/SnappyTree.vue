@@ -9,7 +9,6 @@
                 :key="menu.item.id"
                 :left="getLeft(menu)"
                 :top="getTop(menu)"
-                @size="onSize"
         >
             <item v-for="item in menu.item.children" :key="item.id" :item="item" @size="onSize"/>
         </dropout>
@@ -68,22 +67,22 @@
       },
       expandedItems1: {
         handler (after, before) {
-          const renderLength = this.renderDropouts.length
-          console.log('Triggered watcher...')
-          this.renderDropouts = [{
-            item: this.expandedItems[0],
-            parentRect: {
-              top: 30,
-              right: 0
-            }
-          }]
-          /*for (let i=0; i < renderLength; i++) {
+          const renderLength = this.after.length
+          console.log('Triggered watcher...', after, before)
+
+          if (after.length > before.length) {
+            return
+          }
+
+          const newRenderDropouts = []
+
+          for (let i=0; i < renderLength; i++) {
             const tempItem = this.expandedItems[i]
             if (tempItem) {
               this.renderDropouts.push(tempItem)
             }
 
-          }*/
+          }
         }
       }
     },
@@ -137,14 +136,19 @@
       },
       onSize (parentRect) {
         console.log('OnSize: ', parentRect)
-        const tempItem = this.expandedItems[this.renderDropouts.length]
-        if (tempItem) {
-          console.log('New Dropout')
-          this.renderDropouts.push({
-            item: tempItem,
-            parentRect
-          })
+
+        const tempItem = this.expandedItems[this.renderDropouts.length] || this.expandedItems[this.expandedItems.length -1 ]
+        const newRenderDropouts = []
+        let i=0
+        while (this.renderDropouts[i] && this.renderDropouts[i].item.parent !== tempItem.parent) {
+          newRenderDropouts.push(this.renderDropouts[i])
+          i++
         }
+        newRenderDropouts.push({
+          item: tempItem,
+          parentRect
+        })
+        Vue.set(this, 'renderDropouts', newRenderDropouts)
       }
     },
 
